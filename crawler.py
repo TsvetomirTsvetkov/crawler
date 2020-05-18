@@ -6,29 +6,45 @@ from bs4 import BeautifulSoup as BS
 
 STARTING_URL = 'http://register.start.bg/'
 HISTOGRAM = {}
-SETS = set()
+SITES_SET = set()
+
+
+def get_response(*, url):
+    try:
+        response = requests.get(url, timeout=1)
+        return response
+    except Exception:
+        print(f'Something went wrong while trying to access {url}')
+        print(response)
 
 
 def get_links_from_site(*, url):  # Finds all urls in html href tag
     found_urls = set()
 
-    try:
-        response = requests.get(url, timeout=1).content
-    except Exception:
-        print(f'Something went wrong while trying to access {url}')
-        print(response)
-        return found_urls
+    response = get_response(url=url)
 
-    html = response.decode('utf-8')
-    soup = BS(html, features='html.parser')
+    if response:
+        add_server_to_histogram(response=response)
 
-    for a in soup.find_all(href=True):
-        url = re.match(r'https?://(.*)\.bg/?(.*)', str(a['href']))
+        html = response.content.decode('utf-8')
+        soup = BS(html, features='html.parser')
 
-        if url:
-            found_urls.add(url.group())
+        for a in soup.find_all(href=True):
+            url = re.match(r'https?://(.*)\.bg/?(.*)', str(a['href']))
+
+            if url:
+                found_urls.add(url.group())
 
     return found_urls
+
+
+def add_server_to_histogram(*, response):
+    key = response.headers["Server"]
+
+    if key in HISTOGRAM.keys():
+        HISTOGRAM[key] += 1
+    else:
+        HISTOGRAM[key] = 1
 
 
 def bfs():
@@ -36,7 +52,12 @@ def bfs():
 
 
 def main():
-    print(len(get_links_from_site(url='http://register.start.bg/')))
+    SITES_SET.add(STARTING_URL)
+    initialize_set = get_links_from_site(url=STARTING_URL)
+    SITES_SET.update(initialize_set)
+
+    print('SITES_SET\n', SITES_SET)
+    print('HISTOGRAM\n', HISTOGRAM)
 
 
 if __name__ == '__main__':
