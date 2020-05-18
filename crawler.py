@@ -12,17 +12,13 @@ html = response.decode('utf-8')
 
 starting_soup = BS(html, features="html.parser")
 
-
-found_urls = []
-
-
-def main():
-    for a in starting_soup.find_all(href=True):
-        url = re.match('https?://(.*).bg/?', str(a['href']))
-
-        if url:
-            print("Found URL:", url.group())
+found_urls_set = set()
 
 
-if __name__ == '__main__':
-    main()
+for a in starting_soup.find_all(href=True):
+    url = re.match('https?://(.*)\.bg/?(.*)', str(a['href']))
+
+    if url:
+        found_urls_set.add(url.group())
+
+print(found_urls_set)
