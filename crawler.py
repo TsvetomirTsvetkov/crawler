@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup as BS
 
 STARTING_URL = 'http://register.start.bg/'
 HISTOGRAM = {}
-SITES_SET = set()
+SITES_SET = set()  # TODO: Change type to list
 
 
 def get_response(*, url):
