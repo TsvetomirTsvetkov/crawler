@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import String, Integer, Column
 from contextlib import contextmanager
+from settings import DB_NAME
 
 STARTING_URL = 'http://register.start.bg/'
 OUR_HEADERS = {
@@ -13,12 +14,11 @@ OUR_HEADERS = {
 }
 HISTOGRAM = {}
 SITES_URLS = []
-DB_NAME = "server.db"
+
 
 engine = create_engine(f"sqlite:///{DB_NAME}")
 Base = declarative_base()
 Session = sessionmaker(bind=engine, expire_on_commit=False)
-# Base.metadata.create_all(engine)
 
 
 @contextmanager
