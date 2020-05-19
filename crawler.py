@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup as BS
 
 STARTING_URL = 'http://register.start.bg/'
 HISTOGRAM = {}
-SITES_SET = set()  # TODO: Change type to list
+SITES_URLS = []
 
 
 def get_response(*, url):
@@ -19,7 +19,7 @@ def get_response(*, url):
 
 
 def get_links_from_site(*, url):  # Finds all urls in html href tag
-    found_urls = set()
+    found_urls = []
 
     response = get_response(url=url)
 
@@ -33,7 +33,7 @@ def get_links_from_site(*, url):  # Finds all urls in html href tag
             url = re.match(r'https?://(.*)\.bg/?(.*)', str(a['href']))
 
             if url:
-                found_urls.add(url.group())
+                found_urls.append(url.group())
 
     return found_urls
 
@@ -47,16 +47,23 @@ def add_server_to_histogram(*, response):
         HISTOGRAM[key] = 1
 
 
-def bfs():
-    pass
+def add_urls_to_url_list(*, found_urls):
+    for url in found_urls:
+        if url not in SITES_URLS:
+            SITES_URLS.append(url)
+
+
+def bfs(url_list, index):
+    if len(url_list) - 1 == index:
+        return
 
 
 def main():
-    SITES_SET.add(STARTING_URL)
+    SITES_URLS.append(STARTING_URL)
     initialize_set = get_links_from_site(url=STARTING_URL)
-    SITES_SET.update(initialize_set)
+    SITES_URLS.extend(initialize_set)
 
-    print('SITES_SET\n', SITES_SET)
+    print('SITES_SET\n', SITES_URLS)
     print('HISTOGRAM\n', HISTOGRAM)
 
 
