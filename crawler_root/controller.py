@@ -73,12 +73,15 @@ class Controller:
                 Controller.SITES_URLS.append(url)
 
     def add_server_to_histogram(self, response):
-        key = response.headers["Server"]
+        try:
+            key = response.headers["Server"]
 
-        if key in Controller.HISTOGRAM.keys():
-            Controller.HISTOGRAM[key] += 1
-        else:
-            Controller.HISTOGRAM[key] = 1
+            if key in Controller.HISTOGRAM.keys():
+                Controller.HISTOGRAM[key] += 1
+            else:
+                Controller.HISTOGRAM[key] = 1
+        except Exception:
+            print("[Couldn't find server tag]")
 
     def get_response(self, url):
         try:
