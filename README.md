@@ -1,10 +1,8 @@
 # Crawler
 
-*Crawler v.1.0.0*
-<img src ="images/crawler.gif">
-
 ## Contents
 - [About](#about)
+- [Version](#version)
 - [Requirements](#requirements)
 - [Usage](#usage)
 - [FAQ](#faq)
@@ -14,14 +12,18 @@
 Crawler is a tool used to "crawl" through the pages of the Internet 
 (more specifically Bulgarian webpages) and collect and store information 
 about the sites it finds along its way.
-
-<img src ="images/crawler_menu.png">
-
 So far Crawler only stores data about the server software that runs the 
 page, but there's potential to do much more.
 
+## Version
+**Crawler v.2.0.0 (Current version)**
+
+<img src ="images/crawler_menu.png">
 <img src ="images/crawler_start.png">
 
+**Crawler v.1.0.0 (First version)**
+
+<img src ="images/crawler.gif">
 
 ## Requirements
 - Linux-based OS
