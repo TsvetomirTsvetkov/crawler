@@ -19,12 +19,8 @@ class Controller:
     def see_db(self):
         return self.model.see_db()
 
-    #  ===============================================================================================================
-
     def fill_db(self, servers):
         self.model.fill_db(servers)
-
-    #  ===============================================================================================================
 
     def start_crawling_without_stopping(self):
         Controller.SITES_URLS.append(Controller.STARTING_URL)
@@ -55,7 +51,7 @@ class Controller:
 
         return found_urls
 
-    def bfs(self, url_list, index):
+    def bfs(self, url_list, index):  # Make it work without recursion?
         if len(url_list) - 1 == index:
             return
 
@@ -89,3 +85,6 @@ class Controller:
             return response
         except Exception:
             print(f'[Something went wrong while trying to get response from {url}]')
+
+    def get_analytics(self, hour=False, day=False, month=False):
+        return self.model.get_analytics(hour=hour, day=day, month=month)
