@@ -1,6 +1,6 @@
 import sys
-from db import Database
-from view import View
+from crawler_root.db import Database
+from crawler_root.view import View
 
 
 class Application:

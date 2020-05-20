@@ -2,9 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import String, Integer, Column
-from settings import DB_NAME
 from contextlib import contextmanager
-
+from .settings import DB_NAME
 
 engine = create_engine(f"sqlite:///{DB_NAME}")
 Base = declarative_base()
