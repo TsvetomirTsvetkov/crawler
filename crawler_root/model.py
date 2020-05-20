@@ -24,3 +24,13 @@ class Model:
     @classmethod
     def fill_db(cls, servers):
         cls.gateway.fill_db(servers)
+
+    @classmethod
+    def get_analytics(cls, hour=False, day=False, month=False):
+        raw_servers = cls.gateway.get_analytics(hour=hour, day=day, month=month)
+
+        servers = []
+        for raw_server in raw_servers:
+            server_model = cls(**raw_server)
+            servers.append(server_model)
+        return servers

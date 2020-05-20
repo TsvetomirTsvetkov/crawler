@@ -1,6 +1,7 @@
 import os
 from tabulate import tabulate
 from .controller import Controller
+from time import sleep
 
 
 class View:
@@ -17,11 +18,21 @@ class View:
     def show_commands(self):
         print('Use the number to specify which command you want to execute.')
         print('============================================================')
-        print('1. Start crawling (without stopping)')
+        print('1. Start Crawling (without stopping)')
         # print('2. start_crawling_in_layers')
-        print('2. See database')
+        print('2. See Database')
+        print('3. Show Analytics')
         print('------------------------------------------------------------')
         print('9. Exit\n')
+
+    def show_analytic_options(self):
+        print('Use the number to specify which command you want to execute.')
+        print('============================================================')
+        print('1. Last Hour')
+        print('2. Last Day')
+        print('3. Last 30 Days')
+        print('------------------------------------------------------------')
+        print('9. Go back\n')
 
     def execute_command(self):
         self.show_commands()
@@ -35,6 +46,8 @@ class View:
             #     self.start_crawling_in_layers()
             elif command_number == '2':
                 self.see_db()
+            elif command_number == '3':
+                self.show_analytics()
             else:
                 print('============================================================')
                 print('Unrecognized command. Try again.')
@@ -70,3 +83,38 @@ class View:
             print('No servers in the database.')
 
         print('============================================================')
+
+    def show_analytics(self):
+        self.show_analytic_options()
+        headers = ["NUMBER"]
+        servers_list = []
+        command_number = input('>  ')
+        os.system('clear')
+
+        if command_number == '1':
+            analytics = self.controller.get_analytics(hour=True)
+        elif command_number == '2':
+            analytics = self.controller.get_analytics(day=True)
+        elif command_number == '3':
+            analytics = self.controller.get_analytics(month=True)
+        else:
+            print('============================================================')
+            print('Unrecognized command. Going back to Main Menu.')
+            print('============================================================')
+            return
+
+        servers_list.append((len(analytics),))
+        print(tabulate(servers_list, headers=headers, tablefmt="grid"))
+        print('============================================================')
+        save_file = input('Do you want to save this into a file? < y / n > ')
+        print('============================================================')
+        if save_file == 'y':
+            # Do something ...
+            print('Analytics saved to ...')
+        elif save_file == 'n':
+            print('Analytics were not saved.')
+        else:
+            print('Unrecognized command. Going back to Main Menu.')
+        print('============================================================')
+        sleep(1)
+        os.system('clear')
