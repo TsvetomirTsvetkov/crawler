@@ -54,13 +54,13 @@ class View:
 
     def see_db(self):
         servers = self.controller.see_db()
-        headers = ["ID", "NAME", "NUMBER"]
+        headers = ["ID", "NAME", "NUMBER, ADDED"]
 
         servers_list = []
 
         if servers:
             for server in servers:
-                servers_list.append((server.server_id, server.name, server.number))
+                servers_list.append((server.server_id, server.name, server.number, server.added))
 
             print(tabulate(servers_list, headers=headers, tablefmt="grid"))
             input('Press Enter...')
