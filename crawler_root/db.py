@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import String, Integer, Column
+from sqlalchemy import String, Integer, Column, DateTime
 from contextlib import contextmanager
 from .settings import DB_NAME
 
@@ -21,6 +21,7 @@ class Server(Base):
     server_id = Column(Integer, primary_key=True)
     name = Column(String)
     number = Column(Integer)
+    added = Column(DateTime)
 
 
 @contextmanager

@@ -4,10 +4,11 @@ from .gateway import Gateway
 class Model:
     gateway = Gateway()
 
-    def __init__(self, server_id, name, number):
+    def __init__(self, server_id, name, number, added):
+        self.server_id = server_id
         self.name = name
         self.number = number
-        self.server_id = server_id
+        self.added = added
 
     @classmethod
     def see_db(cls):

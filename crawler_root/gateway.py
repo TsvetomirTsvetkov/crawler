@@ -1,4 +1,5 @@
 from .db import session_scope, Server
+from datetime import datetime
 
 
 class Gateway:
@@ -24,4 +25,4 @@ class Gateway:
                 if server:
                     server.number = servers[key]
                 else:
-                    session.add(Server(name=key, number=servers[key]))
+                    session.add(Server(name=key, number=servers[key], added=datetime.now()))
