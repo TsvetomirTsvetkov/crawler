@@ -1,5 +1,6 @@
 import os
 from controller import Controller
+from tabulate import tabulate
 
 
 class View:
@@ -52,12 +53,20 @@ class View:
         print('=========================END================================')
 
     def see_db(self):
-        print('============================================================')
         servers = self.controller.see_db()
+        headers = ["ID", "NAME", "NUMBER"]
+
+        servers_list = []
+
         if servers:
             for server in servers:
-                print(server.server_id, server.name, server.number)
+                servers_list.append((server.server_id, server.name, server.number))
+
+            print(tabulate(servers_list, headers=headers, tablefmt="grid"))
+            input('Press Enter...')
+            os.system('clear')
         else:
+            print('============================================================')
             print('No servers in the database.')
 
         print('============================================================')
