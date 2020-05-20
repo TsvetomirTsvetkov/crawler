@@ -1,7 +1,7 @@
 import re
 import requests
 from bs4 import BeautifulSoup as BS
-from model import Model
+from .model import Model
 
 
 class Controller:

@@ -1,6 +1,6 @@
 import os
-from controller import Controller
 from tabulate import tabulate
+from .controller import Controller
 
 
 class View:

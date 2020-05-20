@@ -1,4 +1,4 @@
-from gateway import Gateway
+from .gateway import Gateway
 
 
 class Model:

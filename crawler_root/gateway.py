@@ -1,4 +1,4 @@
-from db import session_scope, Server
+from .db import session_scope, Server
 
 
 class Gateway:
