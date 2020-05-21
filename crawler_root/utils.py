@@ -12,5 +12,5 @@ def serialize_model(obj):
 
 
 def log_analytics(analytics_dict):
-    with open(ANALYTICS_NAME, 'w') as f:
+    with open(f'crawler_root/{ANALYTICS_NAME}', 'w') as f:
         f.write(json.dumps(analytics_dict, indent=4, default=serialize_model))
