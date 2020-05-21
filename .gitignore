@@ -133,3 +133,6 @@ dmypy.json
 
 # Json
 *.json
+
+# Png
+*.png
