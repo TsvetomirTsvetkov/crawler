@@ -4,3 +4,4 @@ bs4==0.0.1
 tabulate==0.8.7
 Flask==1.1.2
 pytest==5.4.2
+matplotlib==3.2.1
