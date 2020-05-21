@@ -11,6 +11,11 @@ class Model:
         self.added = added
 
     @classmethod
+    def serialize_model(cls):
+        data = [str(cls.server_id), cls.name, str(cls.number), str(cls.added)]
+        return data
+
+    @classmethod
     def see_db(cls):
         raw_servers = cls.gateway.get_all_servers()
 

@@ -2,6 +2,8 @@ import os
 from tabulate import tabulate
 from .controller import Controller
 from time import sleep
+from .utils import log_analytics
+from .settings import ANALYTICS_NAME
 
 
 class View:
@@ -86,31 +88,28 @@ class View:
 
     def show_analytics(self):
         self.show_analytic_options()
-        headers = ["NUMBER"]
+        headers = ["LAST HOUR", "LAST DAY", "LAST MONTH"]
         servers_list = []
-        command_number = input('>  ')
+
         os.system('clear')
 
-        if command_number == '1':
-            analytics = self.controller.get_analytics(hour=True)
-        elif command_number == '2':
-            analytics = self.controller.get_analytics(day=True)
-        elif command_number == '3':
-            analytics = self.controller.get_analytics(month=True)
-        else:
-            print('============================================================')
-            print('Unrecognized command. Going back to Main Menu.')
-            print('============================================================')
-            return
+        analytics_hour = self.controller.get_analytics(hour=True)
+        analytics_day = self.controller.get_analytics(day=True)
+        analytics_month = self.controller.get_analytics(month=True)
 
-        servers_list.append((len(analytics),))
+        servers_list.append((len(analytics_hour), len(analytics_day), len(analytics_month)))
         print(tabulate(servers_list, headers=headers, tablefmt="grid"))
         print('============================================================')
         save_file = input('Do you want to save this into a file? < y / n > ')
         print('============================================================')
         if save_file == 'y':
-            # Do something ...
-            print('Analytics saved to ...')
+            analytics_dictionary = {  # Passing as Models
+                "LAST HOUR": analytics_hour,
+                "LAST DAY": analytics_day,
+                "LAST MONTH": analytics_month
+            }
+            log_analytics(analytics_dictionary)
+            print(f'Analytics are being saved to {ANALYTICS_NAME}')
         elif save_file == 'n':
             print('Analytics were not saved.')
         else:
