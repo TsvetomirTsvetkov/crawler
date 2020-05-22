@@ -69,7 +69,7 @@ class View:
 
     def see_db(self):
         servers = self.controller.see_db()
-        headers = ["ID", "NAME", "NUMBER, ADDED"]
+        headers = ["ID", "NAME", "NUMBER", "ADDED"]
 
         servers_list = []
 
