@@ -3,7 +3,7 @@ from tabulate import tabulate
 from .controller import Controller
 from time import sleep
 from .utils import log_analytics
-from .settings import ANALYTICS_NAME
+from .settings import ANALYTICS_NAME_JSON, ANALYTICS_NAME_PNG
 
 
 class View:
@@ -109,11 +109,12 @@ class View:
                 "LAST MONTH": analytics_month
             }
             log_analytics(analytics_dictionary)
-            print(f'Analytics are being saved to {ANALYTICS_NAME}')
+            print(f'Analytics are being saved to [{ANALYTICS_NAME_JSON}]')
+            print(f'Diagram is being saved to [{ANALYTICS_NAME_PNG}]')
         elif save_file == 'n':
             print('Analytics were not saved.')
         else:
             print('Unrecognized command. Going back to Main Menu.')
         print('============================================================')
-        sleep(1)
+        sleep(2)
         os.system('clear')
