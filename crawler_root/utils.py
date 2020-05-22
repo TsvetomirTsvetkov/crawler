@@ -30,5 +30,5 @@ def analytics_diagram():
     period = ['LAST MONTH', 'LAST DAY', 'LAST HOUR']
     period_data = [data_last_month, data_last_day, data_last_hour]
     ax.bar(period, period_data)
-    ax.legend(['Number of new Servers'], loc = 'upper center', bbox_to_anchor = (0.5, 1.1))
+    ax.legend(['Number of new Servers'], loc='upper center', bbox_to_anchor=(0.5, 1.1))
     plt.savefig(f'crawler_root/saved_data/{ANALYTICS_NAME_PNG}')
